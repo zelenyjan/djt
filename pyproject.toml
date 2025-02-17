@@ -1,0 +1,131 @@
+[project]
+name = "sample-azure"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Jan Zelený",email = "zelenja8@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13,<4"
+dependencies = [
+    "django (>=5.1.6,<6.0.0)",
+    "whitenoise (>=6.9.0,<7.0.0)",
+    "django-storages[azure] (>=1.14.5,<2.0.0)",
+    "boto3 (>=1.36.22,<2.0.0)",
+    "django-environ (>=0.12.0,<0.13.0)",
+    "celery (>=5.4.0,<6.0.0)",
+    "gunicorn (>=23.0.0,<24.0.0)",
+    "django-cors-headers (>=4.7.0,<5.0.0)",
+    "djangorestframework (>=3.15.2,<4.0.0)",
+    "markdown (>=3.7,<4.0)",
+    "django-filter (>=25.1,<26.0)",
+    "drf-spectacular[sidecar] (>=0.28.0,<0.29.0)",
+    "sentry-sdk (>=2.22.0,<3.0.0)",
+    "redis (>=5.2.1,<6.0.0)",
+    "colorama (>=0.4.6,<0.5.0)",
+    "pytest (>=8.3.4,<9.0.0)",
+    "coverage[toml] (>=7.6.12,<8.0.0)",
+    "pytest-sugar (>=1.0.0,<2.0.0)",
+    "pytest-cov (>=6.0.0,<7.0.0)",
+    "pytest-django (>=4.10.0,<5.0.0)",
+    "factory-boy (>=3.3.3,<4.0.0)",
+    "django-anymail (>=12.0,<13.0)",
+    "azure-identity (>=1.20.0,<2.0.0)",
+    "psycopg[binary] (>=3.2.4,<4.0.0)",
+    "pillow (>=11.1.0,<12.0.0)"
+]
+
+[tool.poetry.requires-plugins]
+poetry-plugin-export = ">=1.8"
+
+[tool.poetry.group.ruff.dependencies]
+ruff = "^0.9.6"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+extend-exclude = ["*/migrations/*", "**/tmp_*.py", ".poetry"]
+
+[tool.ruff.lint]
+# https://beta.ruff.rs/docs/rules/
+select = [
+  "F",
+  "E",
+  "W",
+  "C90",
+  "I",
+  "N",
+  "D",
+  "UP",
+  "YTT",
+  "S",
+  "B",
+  "A",
+  "C4",
+  "T10",
+  "DJ",
+  "EXE",
+  "FA",
+  "G",
+  "INP",
+  "T20",
+  "PT",
+  "INT",
+  "PTH",
+  "TD",
+  "ERA",
+  "PGH",
+]
+ignore = [
+  "D203",
+  "D212",
+  "D104",
+  "D100",
+  "D106",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"**/tests/test_*.py" = ["S101"]
+"**/tests.py" = ["S101"]
+
+[tool.ruff.lint.isort]
+required-imports = ["from __future__ import annotations"]
+force-wrap-aliases = true
+combine-as-imports = true
+no-lines-before = ["first-party"]
+known-first-party = ["djt"]
+section-order = [
+  "future",
+  "standard-library",
+  "django",
+  "drf",
+  "third-party",
+  "config",
+  "first-party",
+  "local-folder",
+]
+[tool.ruff.lint.isort.sections]
+"django" = ["django"]
+"drf" = ["rest_framework"]
+"config" = ["config"]
+
+[tool.pytest.ini_options]
+minversion = 6.0
+addopts = "--ds=config.settings.test --reuse-db"
+python_files = ["tests.py", "test_*.py"]
+norecursedirs = ["node_modules"]
+
+[tool.coverage.run]
+branch = true
+omit = [
+    '*/migrations/*',
+    '*/site-packages/*',
+    'manage.py',
+    '*/.pycharm_helpers/*',
+    '*/pycharm/*',
+]
