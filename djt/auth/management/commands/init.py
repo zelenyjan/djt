@@ -12,7 +12,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         """Handle the command."""
-        User.objects.create_superuser(
-            "jan2@zeleny.io",
-            password="changeme",  # noqa: S106
-        )
+        try:
+            User.objects.get(email="jan@zeleny.io")
+        except User.DoesNotExist:
+            User.objects.create_superuser(
+                "jan@zeleny.io",
+                password="changeme",  # noqa: S106
+            )
