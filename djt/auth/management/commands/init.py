@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-from django.contrib.auth.models import User
 from django.core.management import BaseCommand
+
+from djt.auth.models import User
 
 
 class Command(BaseCommand):
