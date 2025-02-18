@@ -7,7 +7,7 @@ if [ "$1" = "gunicorn" ]; then
   # run migrations and collect static only when app is starting
   python manage.py migrate --noinput
   python manage.py collectstatic --noinput
-  service ssh start
+  python manage.py init
 fi
 
 exec "$@"
