@@ -13,7 +13,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """Handle the command."""
         User.objects.create_superuser(
-            "",
-            "jan@zeleny.io",
+            "jan2@zeleny.io",
             password="changeme",  # noqa: S106
         )
