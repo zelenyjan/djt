@@ -57,4 +57,14 @@ COPY .. $APP_HOME
 RUN sed -i 's/\r$//g'  $APP_HOME/entrypoint
 RUN chmod +x  $APP_HOME/entrypoint
 
+# Start and enable SSH
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends dialog \
+    && apt-get install -y --no-install-recommends openssh-server \
+    && echo "root:Docker!" | chpasswd \
+    && chmod u+x ./entrypoint
+COPY sshd_config /etc/ssh/
+
+EXPOSE 8080 2222
+
 ENTRYPOINT ["./entrypoint"]
