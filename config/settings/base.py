@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # should be last
     "drf_spectacular",
     "drf_spectacular_sidecar",
+    "djt.ai_samples",
 ]
 
 
@@ -235,3 +236,8 @@ SPECTACULAR_SETTINGS = {
     # OTHER SETTINGS
     "PARSER_WHITELIST": ["rest_framework.parsers.JSONParser"],
 }
+
+
+# OPEN AI
+# ------------------------------------------------------------------------------
+OPENAI_API_KEY = env("OPENAI_API_KEY", default="")

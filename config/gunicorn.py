@@ -10,4 +10,4 @@ accesslog = "-"
 errorlog = "-"
 loglevel = "debug"
 worker_tmp_dir = "/dev/shm"  # noqa: S108
-timeout = 120
+timeout = 600
